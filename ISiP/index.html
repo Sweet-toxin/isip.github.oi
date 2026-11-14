@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISiP is the best group</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== ШАПКА ===== -->
+  <header class="header">
+    <a href="#" class="logo">ISiP is the best group</a>
+
+    <nav>
+      <ul class="nav-list">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#gallery">Фото</a></li>
+        <li><a href="#music">Музыка</a></li>
+        <li><a href="#memes">Мемы</a></li>
+        <li><a href="#generator">Вайб дня</a></li>
+        <li><a href="#quiz">Квиз</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">🌙</button>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+    </div>
+  </header>
+
+  <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="badge">✨ ISiP is the best group</span>
+      <h1>Твой <span class="grad">вайб</span> —<br>наша тема</h1>
+      <p>Фото, музыка, мемы и квиз — всё, что цепляет нас в 2026.</p>
+      <div class="hero-buttons">
+        <a href="#quiz" class="btn">Пройти квиз →</a>
+        <a href="#gallery" class="btn btn-ghost">Смотреть фото</a>
+      </div>
+    </div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </section>
+
+  <!-- ===== О НАС ===== -->
+  <section class="section" id="about">
+    <h2 class="section-title">Кто мы</h2>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card-icon">🎧</div>
+        <h3>Музыка</h3>
+        <p>Собираем плейлисты под любое настроение — от фонка до инди.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">😂</div>
+        <h3>Мемы</h3>
+        <p>Юмор, который понимают только свои. И это нормально.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🌆</div>
+        <h3>Эстетика</h3>
+        <p>Ночные города, неон, плёночные фото и всё красивое.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ФОТОГАЛЕРЕЯ ===== -->
+  <section class="section" id="gallery">
+    <h2 class="section-title">Моя фотогалерея</h2>
+    <p class="section-sub">Загрузи свои фото — они сохранятся в браузере</p>
+
+    <div class="upload-zone">
+      <label class="upload-btn">
+        📸 Добавить фото
+        <input type="file" id="photoInput" accept="image/*" multiple hidden />
+      </label>
+      <button class="btn btn-ghost" id="clearPhotos">Очистить всё</button>
+    </div>
+
+    <div class="photo-gallery" id="photoGallery"></div>
+    <p class="empty-hint" id="emptyPhotos">Пока пусто — добавь первое фото ✨</p>
+  </section>
+
+  <!-- ===== МУЗЫКА ===== -->
+  <section class="section" id="music">
+    <h2 class="section-title">Мои любимые треки</h2>
+    <p class="section-sub">Добавь песню — она сохранится в браузере</p>
+
+    <form class="music-form" id="musicForm">
+      <input type="text" id="songTitle" placeholder="Название песни" required />
+      <input type="text" id="songArtist" placeholder="Исполнитель" required />
+      <button type="submit" class="btn btn-accent">+ Добавить</button>
+    </form>
+
+    <ul class="music-list" id="musicList"></ul>
+    <p class="empty-hint" id="emptyMusic">Список пуст — добавь первый трек 🎵</p>
+  </section>
+
+  <!-- ===== МЕМЫ 2026 ===== -->
+  <section class="section" id="memes">
+    <h2 class="section-title">Мемы 2026 😂</h2>
+    <p class="section-sub">Кликай — ставь реакцию</p>
+
+    <div class="memes-grid">
+      <div class="meme-card reveal">
+        <div class="meme-emoji">🤖</div>
+        <p class="meme-text">Когда ИИ сделал домаху, а препод всё равно спалил</p>
+        <button class="reaction-btn" data-reactions="0">😂 <span>0</span></button>
+      </div>
+      <div class="meme-card reveal">
+        <div class="meme-emoji">☕</div>
+        <p class="meme-text">«Проснусь пораньше» — сказал я в 3 часа ночи</p>
+        <button class="reaction-btn" data-reactions="0">💀 <span>0</span></button>
+      </div>
+      <div class="meme-card reveal">
+        <div class="meme-emoji">📱</div>
+        <p class="meme-text">5 минут в телефоне = 2 часа спустя</p>
+        <button class="reaction-btn" data-reactions="0">🔥 <span>0</span></button>
+      </div>
+      <div class="meme-card reveal">
+        <div class="meme-emoji">🎮</div>
+        <p class="meme-text">«Последний матч» — 8 матчей спустя</p>
+        <button class="reaction-btn" data-reactions="0">😭 <span>0</span></button>
+      </div>
+      <div class="meme-card reveal">
+        <div class="meme-emoji">💸</div>
+        <p class="meme-text">Зарплата пришла. Зарплата ушла. Классика</p>
+        <button class="reaction-btn" data-reactions="0">😐 <span>0</span></button>
+      </div>
+      <div class="meme-card reveal">
+        <div class="meme-emoji">🛌</div>
+        <p class="meme-text">Планы на выходные vs реальность</p>
+        <button class="reaction-btn" data-reactions="0">😴 <span>0</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ГЕНЕРАТОР ВАЙБА ===== -->
+  <section class="section generator-section" id="generator">
+    <h2 class="section-title">Генератор вайба дня</h2>
+
+    <div class="generator">
+      <div class="vibe-result" id="vibeResult">
+        <div class="vibe-emoji" id="vibeEmoji">✨</div>
+        <h3 class="vibe-title" id="vibeTitle">Нажми кнопку</h3>
+        <p class="vibe-text" id="vibeText">Узнай, какой вайб тебя ждёт сегодня</p>
+        <div class="vibe-color" id="vibeColor"></div>
+      </div>
+      <button class="btn btn-accent btn-lg" id="genBtn">🎲 Сгенерировать вайб</button>
+    </div>
+  </section>
+
+  <!-- ===== КВИЗ ===== -->
+  <section class="section" id="quiz">
+    <h2 class="section-title">Какой ты вайб?</h2>
+
+    <div class="quiz">
+      <div id="quizBox">
+        <p class="quiz-question" id="question">Вопрос</p>
+        <div class="quiz-options" id="options"></div>
+      </div>
+      <div id="result" class="result hidden">
+        <h3 id="resultTitle">Твой вайб:</h3>
+        <p id="resultText"></p>
+        <button class="btn" id="restart">Пройти заново</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ПОДВАЛ ===== -->
+  <footer class="footer">
+    <p>Сделано с ❤️ на втором курсе · ISiP is the best group</p>
+    <div class="socials">
+      <a href="#">TG</a>
+      <a href="#">VK</a>
+      <a href="#">GH</a>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

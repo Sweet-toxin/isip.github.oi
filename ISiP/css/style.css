@@ -1,0 +1,711 @@
+/* ============================================
+   1. ТЕМЫ (тёмная / светлая)
+   ============================================ */
+:root,
+[data-theme="dark"] {
+  --bg: #0a0a14;
+  --bg-soft: #16162a;
+  --bg-card: #1c1c35;
+  --text: #ffffff;
+  --muted: #a0a0c0;
+  --accent: #a855f7;
+  --accent-2: #06b6d4;
+  --accent-3: #f472b6;
+  --accent-4: #fbbf24;
+  --border: rgba(255,255,255,0.08);
+  --radius: 20px;
+  --shadow: rgba(168,85,247,0.4);
+}
+
+[data-theme="light"] {
+  --bg: #faf5ff;
+  --bg-soft: #ffffff;
+  --bg-card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b6b8a;
+  --accent: #9333ea;
+  --accent-2: #0891b2;
+  --accent-3: #ec4899;
+  --accent-4: #f59e0b;
+  --border: rgba(0,0,0,0.08);
+  --shadow: rgba(147,51,234,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+h1, h2, h3, .logo { font-family: 'Unbounded', sans-serif; }
+
+/* ============================================
+   2. ШАПКА
+   ============================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  max-width: 220px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+.nav-list a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color .2s;
+  position: relative;
+}
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .3s;
+}
+.nav-list a:hover { color: var(--text); }
+.nav-list a:hover::after { width: 100%; }
+
+.header-actions {
+  display: flex;
+  gap: .8rem;
+  align-items: center;
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform .3s, background .3s;
+}
+.theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   3. HERO
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 750px; }
+
+.badge {
+  display: inline-block;
+  padding: .5rem 1.2rem;
+  border-radius: 100px;
+  background: linear-gradient(120deg, rgba(168,85,247,.2), rgba(6,182,212,.2));
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% { transform: scale(1.05); }
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 8vw, 5.5rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 1.5rem;
+}
+
+.grad {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent-4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% auto;
+  animation: gradShift 5s linear infinite;
+}
+@keyframes gradShift {
+  to { background-position: 300% center; }
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.15rem;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Пятна */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .55;
+  z-index: 1;
+}
+.blob-1 {
+  width: 420px; height: 420px;
+  background: var(--accent);
+  top: -120px; left: -120px;
+  animation: float 9s ease-in-out infinite;
+}
+.blob-2 {
+  width: 380px; height: 380px;
+  background: var(--accent-2);
+  bottom: -100px; right: -100px;
+  animation: float 11s ease-in-out infinite reverse;
+}
+.blob-3 {
+  width: 300px; height: 300px;
+  background: var(--accent-3);
+  top: 40%; left: 50%;
+  animation: float 13s ease-in-out infinite;
+}
+@keyframes float {
+  50% { transform: translate(50px, 40px) scale(1.15); }
+}
+
+/* ============================================
+   4. КНОПКИ
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .9rem 2rem;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.btn-accent {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+.btn-accent:hover { box-shadow: 0 10px 30px var(--shadow); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-lg { padding: 1.1rem 2.5rem; font-size: 1.05rem; }
+
+/* ============================================
+   5. СЕКЦИИ
+   ============================================ */
+.section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: .8rem;
+  text-align: center;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+/* ============================================
+   6. КАРТОЧКИ
+   ============================================ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px var(--shadow);
+}
+.card-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+.card h3 { font-size: 1.2rem; margin-bottom: .6rem; }
+.card p { color: var(--muted); font-size: .95rem; line-height: 1.6; }
+
+/* ============================================
+   7. ФОТОГАЛЕРЕЯ
+   ============================================ */
+.upload-zone {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .9rem 2rem;
+  background: linear-gradient(120deg, var(--accent), var(--accent-3));
+  color: #fff;
+  border-radius: 100px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.upload-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.photo-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 2px solid var(--border);
+  transition: transform .3s, border-color .3s;
+  cursor: pointer;
+}
+.photo-item:hover {
+  transform: scale(1.03);
+  border-color: var(--accent);
+}
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,.7);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.photo-item:hover .photo-remove { opacity: 1; }
+
+.empty-hint {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   8. МУЗЫКА
+   ============================================ */
+.music-form {
+  display: flex;
+  gap: .8rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.music-form input {
+  flex: 1;
+  min-width: 180px;
+  padding: .9rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color .2s;
+}
+.music-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.music-list {
+  list-style: none;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.music-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: transform .2s, border-color .2s;
+  animation: slideIn .4s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+}
+.music-item:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
+}
+.music-num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  min-width: 32px;
+}
+.music-info { flex: 1; }
+.music-title { font-weight: 600; margin-bottom: .2rem; }
+.music-artist { color: var(--muted); font-size: .9rem; }
+.music-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: .3rem .6rem;
+  border-radius: 8px;
+  transition: color .2s, background .2s;
+}
+.music-remove:hover {
+  color: var(--accent-3);
+  background: rgba(244,114,182,.1);
+}
+
+/* ============================================
+   9. МЕМЫ
+   ============================================ */
+.memes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.meme-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  transition: transform .3s, border-color .3s;
+  position: relative;
+  overflow: hidden;
+}
+.meme-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(168,85,247,.1), transparent);
+  transform: translateX(-100%);
+  transition: transform .6s;
+}
+.meme-card:hover::before { transform: translateX(100%); }
+.meme-card:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  border-color: var(--accent-4);
+}
+
+.meme-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  transition: transform .3s;
+}
+.meme-card:hover .meme-emoji { transform: scale(1.2) rotate(10deg); }
+
+.meme-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  min-height: 60px;
+}
+
+.reaction-btn {
+  padding: .6rem 1.4rem;
+  border-radius: 100px;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+.reaction-btn:hover {
+  border-color: var(--accent-4);
+  transform: scale(1.1);
+}
+.reaction-btn.active {
+  background: linear-gradient(120deg, var(--accent), var(--accent-3));
+  border-color: transparent;
+  color: #fff;
+}
+.reaction-btn span { font-weight: 700; font-size: .9rem; }
+
+/* ============================================
+   10. ГЕНЕРАТОР ВАЙБА
+   ============================================ */
+.generator-section { text-align: center; }
+.generator {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.vibe-result {
+  margin-bottom: 2.5rem;
+  transition: transform .4s;
+}
+.vibe-result.bump { transform: scale(1.05); }
+
+.vibe-emoji {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  display: block;
+  transition: transform .4s;
+}
+.vibe-result.bump .vibe-emoji { transform: rotate(15deg) scale(1.1); }
+
+.vibe-title {
+  font-size: 1.8rem;
+  margin-bottom: .8rem;
+  background: linear-gradient(120deg, var(--accent), var(--accent-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.vibe-text {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 450px;
+  margin: 0 auto 1.5rem;
+  min-height: 52px;
+}
+
+.vibe-color {
+  width: 100%;
+  height: 8px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: background .6s;
+}
+
+/* ============================================
+   11. КВИЗ
+   ============================================ */
+.quiz {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.quiz-question {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+.quiz-options { display: flex; flex-direction: column; gap: .8rem; }
+.quiz-options button {
+  padding: 1rem 1.4rem;
+  background: var(--bg-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+.quiz-options button:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  transform: translateX(6px);
+}
+
+.result { text-align: center; }
+.result h3 { font-size: 1.6rem; margin-bottom: 1rem; }
+.result p { color: var(--muted); font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+.hidden { display: none; }
+
+/* ============================================
+   12. ПОДВАЛ
+   ============================================ */
+.footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .9rem;
+}
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.socials a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .2s;
+}
+.socials a:hover { color: var(--accent); }
+
+/* ============================================
+   13. REVEAL
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   14. МОБИЛЬНАЯ ВЕРСИЯ
+   ============================================ */
+@media (max-width: 1100px) {
+  .logo { font-size: .9rem; max-width: 160px; }
+}
+
+@media (max-width: 900px) {
+  .nav-list { gap: 1rem; }
+  .nav-list a { font-size: .82rem; }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 1rem 1.2rem; }
+  .logo { font-size: .85rem; max-width: 130px; }
+  .nav-list {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    flex-direction: column;
+    background: var(--bg-soft);
+    padding: 2rem;
+    gap: 1.5rem;
+    transform: translateX(100%);
+    transition: transform .3s;
+    height: calc(100vh - 64px);
+    width: 75%;
+    border-left: 1px solid var(--border);
+    box-shadow: -10px 0 40px rgba(0,0,0,.3);
+  }
+  .nav-list.open { transform: translateX(0); }
+  .nav-list a { font-size: 1rem; }
+  .burger { display: block; }
+  .section { padding: 4rem 1.2rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; }
+  .music-form { flex-direction: column; }
+  .music-form input { width: 100%; }
+  .upload-zone { flex-direction: column; align-items: center; }
+}
